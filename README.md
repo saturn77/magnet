@@ -1,6 +1,8 @@
 ## "Magnet and Magnet-GUI" Crates
 
-An Example Real Time Motor Controller GUI using the slint-ui framework and the crossbeam library of rust / magnet crate to provide background threading. The slint-ui design languageis used to construct a modern looking GUI using appropriately themed colors and fonts and structured layout. 
+An Example Real Time Motor Controller GUI using the slint-ui framework. 
+
+The slint-ui design languageis used to construct a modern looking GUI using appropriately themed colors and fonts and structured layout. 
 
 This crate is intended to provide a good starting point or template for real time embedded
 communications and control. Overall this repos has the following features and goals:
