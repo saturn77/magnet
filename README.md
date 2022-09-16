@@ -14,11 +14,11 @@ communications and control. Overall this repos has the following features and go
 3. The employment of bi-directional callbacks between
    the slint-ui and the main() loop code
 4. Repeated use of the Weak reference in Slint/Rust to accomplish 
-   multiple callaback handling both in terms of responding to a![Magnet_GUI](https://user-images.githubusercontent.com/5698048/190684457-6e534550-0769-4a4d-b1b6-66228c39612f.gif)
+   multiple callaback handling both in terms of responding to 
 
    a callback from Rust and invoking a callback from Rust
 5. Providing a template like framework for rapidly developing
-   an embedded communication and control project![Magnet_GUI](https://user-images.githubusercontent.com/5698048/190684410-84d42246-ec35-443f-aba7-06dfaad88298.gif)
+   an embedded communication and control project
 
 
 The addition of real time plotting and supporting various communication protocols is envisioned. 
