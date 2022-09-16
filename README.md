@@ -1,4 +1,4 @@
-## "Magnet and Magnet-GUI" Crates
+## Neodymium Magnet ##
 
 An Example Real Time Motor Controller GUI using the slint-ui framework. 
 
