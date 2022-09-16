@@ -1,0 +1,393 @@
+
+import { Slider, GroupBox, HorizontalBox, VerticalBox, TabWidget,  Button, CheckBox, TextEdit, ComboBox } from "std-widgets.slint";
+import {ToggleSwitch} from "switch.slint"; 
+import {ConfigOptions} from "config_options.slint";
+Neodymium := Window {
+visible    : true;
+//default-font-family:  "Noto Sans";
+//default-font-size: 9pt;
+max-width      : 650.0*1px;
+min-width: 500*1px;
+height     : 720*1px;
+property <length> checkbox-text-size : 14*1px; 
+//width : 700*1px;
+//max-width  : 2500*1pt;
+//max-height : 2500*1px;
+background: colorMain;
+
+
+//=================================================
+//  Neodynium Theme Platform GUI
+//  Courtesy of Atlantix Electronic Design Automation (EDA)
+//  https://github.com/saturn77 
+//=================================================
+title: "Neodymium GUI Platform";
+property <color> colorGlow       : #1d6d64da;
+property <color> colorWarning    : #d5232f;
+property <color> colorMain       : #383a3af9;
+property <color> colorBright     : #ffffff;
+property <color> colorTextPrimary: #27f57de0;
+property <color> colorDarkGrey   : #333;
+property <color> colorLightGrey  : #494947;
+property <color> colorMainGreen  : #21be2b;
+property <int> alpha-num    : 0;
+property <string> stringX   : "Hello from Slint! for the " + alpha-num + " th time" ; 
+property <string> stringTic : ""; 
+property <string> stringLog : "";
+// "alpha" callback - calls an increment function *from* Rust and verifies
+// the link from 
+// 1. Slint to Rust via button_set.clicked 
+// 2. Rust to Slint vis rust main() setting stringX value  
+callback alpha <=> button_set.clicked; 
+
+callback logger(string);
+logger(Text) => {
+    log-window.text += Text ;
+
+}
+
+
+VerticalBox {
+
+    HorizontalBox {  
+        Text {
+            text : stringX; 
+            color : colorTextPrimary; 
+            font-size: checkbox-text-size;
+
+        }
+        Text {
+            text : stringTic; 
+            color : colorTextPrimary; 
+            font-size: checkbox-text-size;
+
+        }
+
+        button_set := Button {
+            text : "Set Banner"; 
+            font-size : checkbox-text-size;
+        }
+    }
+    TabWidget {
+        
+
+        
+        Tab {
+            title: "Controls";
+            VerticalBox {
+                alignment: start;
+                Rectangle {
+                    padding-left: 200px;
+                
+                    //x: 10px;
+                    //y: 10px;
+                    width: 50px;
+                    height: 50px;
+                    background: colorMain;
+                    Image {
+                        padding-left: 50px;
+                        source: @image-url("../assets/axial_flux_motor.png");
+                    }
+                }
+                HorizontalBox {
+                    alignment: start;
+                    VerticalLayout {
+                        width : 400px;
+                            GridLayout {
+                                spacing: 5px;
+                                Row {
+                                    cb_freq1 := CheckBox {
+                                        checked : false; 
+                                        opacity: 90%;
+                                        border-color:  colorTextPrimary;
+                                        //background: checked ? colorBright : colorMain;
+                                        toggled => {  if(cb_freq1.checked) {
+                                            cb_freq2.checked = false; 
+                                            cb_freq3.checked = false;
+                                            cb_freq4.checked = false;
+                                        } }
+                                    }
+                                    Text {
+                                        //padding-left: -5px;
+                                        horizontal-alignment: left;
+                                        color : colorTextPrimary; 
+                                        text  : "Duty Cycle";
+                                        font-weight: 2;
+                                        font-family: "Noto-Sans";
+                                        font-size: checkbox-text-size;
+                                        vertical-alignment: center;
+                                    }
+                                    cb_volt1 := CheckBox {
+                                        padding-left: 11px;
+                                        checked : false; 
+                                        opacity: 90%;
+                                        toggled => {  if(cb_volt1.checked) {
+                                            cb_volt2.checked = false; 
+                                            cb_volt3.checked = false;
+                                            cb_volt4.checked = false
+                                        } }
+                                    }
+                                    Text {
+                                        horizontal-alignment: left;
+                                        color : colorTextPrimary; 
+                                        text  : "Volt Watt 1 - Increase";
+                                        font-weight: 2;
+                                        font-family: "Noto-Sans";
+                                        font-size: checkbox-text-size;
+                                        vertical-alignment: center;
+                                    }
+                                }
+                                Row {
+                                    // spacing: -20px;
+                                    // enabled: !disable-toggle.checked;
+                                    cb_freq2 := CheckBox {
+                                        
+                                        checked: false;
+                                        toggled => {if(cb_freq2.checked) {
+                                            cb_freq1.checked = false; 
+                                            cb_freq3.checked = false;
+                                            cb_freq4.checked = false
+                                        }  }
+                                    }
+                                    Text {
+                                        //padding-left: 5px;
+                                        color : colorTextPrimary; 
+                                        text  : "Torque Mode";
+                                        font-weight: 2;
+                                        font-family: "Noto-Sans";
+                                        font-size: checkbox-text-size;
+                                        vertical-alignment: center;
+                                    }
+                                    cb_volt2 := CheckBox {
+                                        checked : false; 
+                                        opacity: 90%;
+                                        toggled => {  if(cb_volt2.checked) {
+                                            cb_volt1.checked = false; 
+                                            cb_volt3.checked = false;
+                                            cb_volt4.checked = false
+                                        } }
+                                    }
+                                    Text {
+                                        horizontal-alignment: left;
+                                        color : colorTextPrimary; 
+                                        text  : "Volt Watt 2 - Increase Max";
+                                        font-weight: 2;
+                                        font-family: "Noto-Sans";
+                                        font-size: checkbox-text-size;
+                                        vertical-alignment: center;
+                                    }
+                                }
+                            Row {
+                                // spacing: -20px;
+                                //enabled: !disable-toggle.checked;
+                                cb_freq3 := CheckBox {
+                                    checked: false;
+                                    toggled => {if(cb_freq3.checked) {
+                                        cb_freq1.checked = false; 
+                                        cb_freq2.checked = false;
+                                        cb_freq4.checked = false
+                                    } }
+                                }
+                                Text {
+                                    //padding-left: 5px;
+                                    color : colorTextPrimary; 
+                                    text  : "Speed Mode";
+                                    font-weight: 2;
+                                    font-family: "Noto-Sans";
+                                    font-size: checkbox-text-size;
+                                    vertical-alignment: center;
+                                }
+                                cb_volt3 := CheckBox {
+                                    checked : false; 
+                                    opacity: 90%;
+                                    toggled => {  if(cb_volt3.checked) {
+                                        cb_volt1.checked = false; 
+                                        cb_volt2.checked = false;
+                                        cb_volt4.checked = false
+                                    } }
+                                }
+                                Text {
+                                    horizontal-alignment: left;
+                                    color : colorTextPrimary; 
+                                    text  : "Volt Mode X";
+                                    font-weight: 2;
+                                    font-family: "Noto-Sans";
+                                    font-size: checkbox-text-size;
+                                    vertical-alignment: center;
+                                }
+                            }
+                        
+                            Row {
+                                // spacing: -40px;
+
+                                cb_freq4 := CheckBox {
+                                    checked: false;
+                                    toggled => {if(cb_freq4.checked) {
+                                        cb_freq1.checked = false; 
+                                        cb_freq2.checked = false;
+                                        cb_freq3.checked = false
+                                    } }
+                                }
+                                Text {
+                                    color : colorTextPrimary; 
+                                    text  : "Position Mode";
+                                    font-weight: 2;
+                                    font-family: "Noto-Sans";
+                                    font-size: checkbox-text-size;
+                                    vertical-alignment: center;
+                                }
+                                cb_volt4 := CheckBox {
+                                    checked : false; 
+                                    opacity: 90%;
+                                    toggled => {  if(cb_volt4.checked) {
+                                        cb_volt1.checked = false; 
+                                        cb_volt2.checked = false;
+                                        cb_volt3.checked = false
+                                    } }
+                                }
+                                Text {
+                                    horizontal-alignment: left;
+                                    color : colorTextPrimary; 
+                                    text  : "Volt Watt 4 - Decrease Max";
+                                    font-weight: 2;
+                                    font-family: "Noto-Sans";
+                                    font-size: checkbox-text-size;
+                                    vertical-alignment: center;
+                                }
+                            }
+                        
+                        }
+                    }
+
+
+
+                }
+                    
+
+
+                    
+
+                    
+                
+
+
+
+
+            HorizontalBox {
+                alignment: start;
+                spacing: 20px;
+
+                ToggleSwitch { text: "RUN"; on_color : colorMainGreen; off_color : colorDarkGrey; label_color : colorMainGreen; }
+                GroupBox {  
+                    spacing: -10px;
+                Button {
+                    text: "START";
+                    height: 30px;
+                    clicked => { log-window.text += "Motor started . . .\n" }
+                }
+            }
+
+            GroupBox {  
+                spacing: -10px;
+            Button {
+                text: "STOP";
+                height: 30px;
+                clicked => { log-window.text += "Motor stopped. . .\n" }
+            }
+            }
+
+        }
+        
+        
+        
+
+                GroupBox {
+                    title: "Motor Speed Control";
+                    
+                    //enabled: !disable-toggle.checked;
+                    
+                    Slider {
+                        value: 42;
+                        //enabled: !disable-toggle.checked;
+                    }
+
+                }
+
+
+                HorizontalBox {
+                    alignment: start;
+
+
+                    Button {
+                        text: "Clear Logger";
+
+                        clicked => { log-window.text = "" }
+                    }
+                    Button {
+                        text: "Get Version";
+
+                        clicked => { log-window.text = "\n" + "**** FPGA Version 0.17.7 " + "\n" + "**** RISCV Softcore Version 0.17.0" }
+                    }
+
+                    button_param := Button {
+                        text: "Get Parameters";
+
+                        clicked => { log-window.text = "Now getting parameters . . . " }
+                    }
+                }
+            
+
+                GridLayout {
+                    Row {
+                        Text {
+                            padding-left: 15px;
+                            horizontal-alignment: left;
+                            color : colorTextPrimary; 
+                            text  : "Logger";
+                            font-weight: 2;
+                            font-family: "Noto-Sans";
+                            font-size: 12pt;
+                            vertical-alignment: center;
+                        }
+                }
+                Row {
+                    Rectangle {  
+                    background: colorMain;
+                        log_window := TextEdit {
+
+                        text: stringLog;
+
+                            wrap: word-wrap;
+                        
+                        vertical-stretch: 200;
+                        height: 200px;
+                        background: colorMain;
+                    //    / color: colorMainGreen;
+                    }
+                    
+                    }
+                }
+                }
+
+            
+            }
+        }
+
+        Tab {
+            title: "Config";
+            ConfigOptions { 
+                bg-color: colorMain; 
+                txt-color: colorTextPrimary;
+                txt-font-size: checkbox-text-size;
+            }
+        }
+    }
+}
+}
+
+        
+    
+        
+    
+
+

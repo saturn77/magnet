@@ -1,0 +1,153 @@
+import { Slider, GroupBox,  SpinBox, HorizontalBox, VerticalBox, TabWidget,  Button, CheckBox, TextEdit, ComboBox } from "std-widgets.slint";
+import {ToggleSwitch} from "switch.slint"; 
+export ConfigOptions := Rectangle {
+    property <color> bg-color : darkgray;
+    property <color> txt-color : green; 
+    property <length> txt-font-size : 12px ;
+    background: bg-color;
+    width: 400px;
+    height: preferred-height;
+    padding-top: 20px;
+
+    // HorizontalBox {  
+    //     Text {
+    //         horizontal-alignment: right;
+    //         padding-top        : 1px;
+    //         padding-left       : 5px;
+    //         text               : "Protection Settings";
+    //         vertical-alignment : center;
+    //         padding-bottom     : 1px;
+    //     }
+    // }
+    GridLayout {
+
+        padding : 25px;
+        spacing: 12px;
+
+        Row {
+            
+            Text {
+                text : "Protection settings will be save upon selection (automatic)";
+                colspan: 2;
+                color : txt-color;
+                font-family: "Noto-Sans";
+                font-size: txt-font-size + 1px;
+            }
+            
+
+        }
+
+        Row { 
+
+            IP_ADDR := ComboBox {
+                width: preferred-width;
+                height: 25px;
+                model: ["192.168.1.110", "192.168.1.115", "192.168.1.133"];
+                current-value: "192.168.1.110";
+                
+            }
+            Text {
+                text : "MODBUS Server IP";
+                vertical-alignment: center;
+                color : txt-color;
+                font-family: "Noto-Sans";
+                font-size: txt-font-size;
+            }
+            
+        }
+
+        Row { 
+            
+            OverCurrent := SpinBox {
+                padding-top: 20px;
+                minimum: 1.0;
+                maximum: 35.0;
+                value : 15.0;
+                height : 25px;
+                enabled: true;
+            }
+            Text {
+                padding-top: 10px;
+                text : "Over Current Instant Protect (AMPS)";
+                vertical-alignment: center;
+                color : txt-color; 
+                font-family: "Noto-Sans";
+                font-size: txt-font-size;
+
+
+            }
+            
+        }
+        Row { 
+            
+            I2T_Current := SpinBox {
+                padding-top: 20px;
+                minimum: 1.0;
+                maximum: 35.0;
+                value : 22.0;
+                height : 25px;
+            }
+            Text {
+                padding-top: 10px;
+                text : "Over Current I2T Start (AMPS)";
+                vertical-alignment: center;
+                color : txt-color;
+                font-family: "Noto-Sans";
+                font-size: txt-font-size;
+            }
+            
+        }
+        Row { 
+            
+            I2T_Timeout := SpinBox {
+                padding-top: 20px;
+                minimum: 1.0;
+                maximum: 1000.0;
+                value : 10.0;
+                height : 25px;
+            }
+            Text {
+                padding-top: 10px;
+                text : "Over Current I2T Duration (SEC)";
+                vertical-alignment: center;
+                color : txt-color;
+                font-family: "Noto-Sans";
+                font-size: txt-font-size;
+
+            }
+            
+        }
+
+        Row { 
+            
+            // MaxSpeed := SpinBox {
+            //     padding-top: 20px;
+            //     minimum: 10.0;
+            //     maximum: 3500.0;
+            //     value : 1800.0;
+            //     height : 25px;
+            // }
+
+            MaxSpeed := TextInput {
+                padding-top: 20px;
+
+                text : 1800.0;
+                height : 25px;
+            }
+            Text {
+                padding-top: 10px;
+                text : "Max Speed (RPM)";
+                vertical-alignment: center;
+                color : txt-color;
+                font-family: "Noto-Sans";
+                font-size: txt-font-size;
+
+            }
+            
+        }
+        
+    }
+
+    }
+
+
