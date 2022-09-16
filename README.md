@@ -2,7 +2,7 @@
 
 An Example Real Time Motor Controller GUI using the slint-ui framework.
 
-<img src="magnet_gui/assets/gui_basic.mp4">
+<img src="magnet_gui/assets/MAGNET_GUI.gif">
 
 The slint-ui design languageis used to construct a modern looking GUI using appropriately themed colors and fonts and structured layout. 
 
