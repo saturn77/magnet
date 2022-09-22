@@ -64,9 +64,10 @@ fn main() {
                 let msgx = slint::SharedString::from(&msg2); 
                 let msgy = slint::SharedString::from(&msg2);
                 let neo_weak_copy = neo_weak.clone();
-                slint::invoke_from_event_loop( move || neo_weak_copy.unwrap().set_stringTic(msgx));
+
+                slint::invoke_from_event_loop( move || neo_weak_copy.unwrap().set_stringTic(msgx)).unwrap();
                 let neo_weak_copy = neo_weak.clone();
-                slint::invoke_from_event_loop( move || neo_weak_copy.unwrap().invoke_logger(msgy));
+                slint::invoke_from_event_loop( move || neo_weak_copy.unwrap().invoke_logger(msgy)).unwrap();
             }
             _ => (),
         } 
@@ -80,9 +81,9 @@ fn main() {
         let msg = slint::SharedString::from(&msg1);
 
         // Setting the StringX property in top_level.slint
-        slint::invoke_from_event_loop( move || neo.unwrap().set_stringX(msg));
+        slint::invoke_from_event_loop( move || neo.unwrap().set_stringX(msg)).unwrap();
         let neo = neo_weak2.clone();
-        slint::invoke_from_event_loop(move || neo.unwrap().set_alpha_num(clicked));
+        slint::invoke_from_event_loop(move || neo.unwrap().set_alpha_num(clicked)).unwrap();
         //neo.set_stringX(msg);
         //neo.set_alpha_num(clicked); 
         clicked+=1;
